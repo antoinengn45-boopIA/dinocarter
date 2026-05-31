@@ -1,0 +1,214 @@
+/* ============================================================
+   DINO CHROME GAME — style.css
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap');
+
+/* ── Reset & base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #f0ece4;
+  --surface:   #e8e4db;
+  --border:    #2b2b2b;
+  --fg:        #2b2b2b;
+  --muted:     #767676;
+  --accent:    #d94f2b;
+  --pro:       #00cc44;
+  --canvas-bg: #f7f7f7;
+  --shadow:    4px 4px 0 #2b2b2b;
+}
+
+body {
+  background: var(--bg);
+  background-image:
+    radial-gradient(circle, #ccc8be 1px, transparent 1px);
+  background-size: 24px 24px;
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 24px 16px 40px;
+  color: var(--fg);
+}
+
+/* ── Poki logo ── */
+#poki-logo-container {
+  margin-bottom: 18px;
+  opacity: 0.9;
+  transition: opacity 0.2s;
+}
+#poki-logo-container:hover { opacity: 1; }
+
+/* ── Headings ── */
+h1 {
+  font-family: 'VT323', monospace;
+  font-size: 36px;
+  letter-spacing: 4px;
+  text-align: center;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  color: var(--fg);
+  text-shadow: 2px 2px 0 var(--accent);
+}
+
+.subtitle {
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 4px;
+  letter-spacing: 1px;
+}
+
+.secret-hint {
+  font-size: 10px;
+  color: #b0a898;
+  margin-bottom: 18px;
+}
+
+kbd {
+  display: inline-block;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 3px;
+  padding: 0 5px;
+  font-size: 10px;
+  font-family: inherit;
+  box-shadow: 1px 1px 0 var(--border);
+}
+
+/* ── Game wrapper ── */
+#game-wrapper {
+  position: relative;
+  width: 600px;
+  max-width: 100%;
+  background: var(--canvas-bg);
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+/* ── Score board ── */
+#score-board {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 6px 10px 4px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  border-bottom: 1px solid #ddd;
+}
+
+#score-board .label { color: var(--muted); }
+#score-board #hi-score { color: var(--muted); }
+#score-board #cur-score { font-weight: bold; color: var(--fg); min-width: 5ch; }
+
+/* Pro badge */
+#pro-badge {
+  display: none;
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  color: var(--pro);
+  border: 1.5px solid var(--pro);
+  padding: 1px 7px;
+  border-radius: 3px;
+  margin-right: auto;
+  animation: problink 1s step-start infinite;
+}
+#pro-badge.on { display: inline-block; }
+@keyframes problink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+/* ── Canvas ── */
+canvas {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* ── Message bar ── */
+#message {
+  text-align: center;
+  padding: 6px 10px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  min-height: 28px;
+  border-top: 1px solid #ddd;
+  background: var(--surface);
+  text-transform: uppercase;
+}
+
+/* ── Leaderboard ── */
+#hiscores {
+  display: flex;
+  gap: 32px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 600px;
+  max-width: 100%;
+}
+
+.score-col {
+  flex: 1 1 220px;
+  background: var(--canvas-bg);
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 14px 16px;
+}
+
+.score-col h2 {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-bottom: 10px;
+  font-weight: normal;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.score-col ul { list-style: none; }
+
+.score-col ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  padding: 4px 0;
+  border-bottom: 1px dashed #ddd;
+}
+.score-col ul li:last-child { border-bottom: none; }
+
+.score-col ul li .rank {
+  color: var(--muted);
+  font-size: 11px;
+  margin-right: 8px;
+  width: 16px;
+}
+.score-col ul li .name { color: var(--fg); flex: 1; }
+.score-col ul li .pts  { font-weight: bold; color: var(--accent); }
+
+/* ── Footer ── */
+footer {
+  margin-top: 28px;
+  font-size: 10px;
+  color: #aaa;
+  letter-spacing: 1px;
+  text-align: center;
+}
+footer a { color: var(--muted); text-decoration: underline; }
+footer a:hover { color: var(--fg); }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  h1 { font-size: 28px; }
+  #game-wrapper,
+  #hiscores { width: 100%; }
+  canvas { image-rendering: auto; }
+  #hiscores { flex-direction: column; gap: 16px; }
+}
